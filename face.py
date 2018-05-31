@@ -203,3 +203,18 @@ if __name__ == '__main__':
             os.system('sudo reboot')
 
             count = 0
+def search ():
+    '''
+    人脸搜索
+    '''
+    f = open("E:/opencv_pictures/face++/image/my_face.jpg", 'rb')
+    img = base64.b64encode(f.read())
+    request_url = "https://aip.baidubce.com/rest/2.0/face/v3/search"
+    params = {"image":img,"image_type":"BASE64","group_id_list":"wenzheng","quality_control":"LOW","liveness_control":"NORMAL"}
+    access_token = '24.1d38fa613271b16392ddf5bad969480b.2592000.1530352882.282335-11330742'
+    request_url = request_url + "?access_token=" + access_token
+    response = requests.post(request_url, data=params)
+    test = response.json().get('score')
+    print(response.json())
+    print(test)
+search()
